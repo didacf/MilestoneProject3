@@ -36,7 +36,7 @@ const Signup = () => {
                 <input type={"text"} id="conPassword" name="conPassword"/>
                 </span>
                 <br/>
-                <input type={"submit"} value="Login"/>
+                <input type={"submit"} value="Signup"/>
             </form>
         </div>
     </>

@@ -1,10 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Signup from './pages/Signup';
+import NavBar from "./components/NavBar"
 
 function App() {
   return (
-    <Signup/>
+    <NavBar/>
   );
 }
 
