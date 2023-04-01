@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request
 from dotenv import load_dotenv
 from flask_cors import CORS
 import os
@@ -47,7 +47,12 @@ class Event(db.Model):
 if __name__ == "__main__":
     app.run(debug=FLASK_DEBUG)
 
-
+def format_event(event):
+    return {
+        "description": event.description,
+        "id": event.id,
+        "created_at": event.created_at
+    }
 #routes
 
 @app.route("/members")
@@ -58,5 +63,13 @@ def members():
 def hello():
     return "Hey!"
 
+@app.route("/event", methods = ["POST"])
+def create_event():
+    description = request.json['description']
+    event = Event(description)
+    db.session.add(event)
+    db.session.commit()
+    return format_event(event)
+    
 if __name__ == '__main__':
     app.run()
