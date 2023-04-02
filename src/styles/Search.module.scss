@@ -1,0 +1,30 @@
+@import "./variables.scss";
+
+.container{
+    
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10%;
+    margin-right: 10%;
+    padding-top: 100px
+}
+
+.form{
+    @include containerDef;
+    padding: 10px;
+
+    &__item{
+        width: 150px;
+        height: $fh/1.5;
+        margin-right:10px;
+        
+    }
+
+    &__date{
+        width: 100px;
+        height: $fh/1.5;
+        margin-right: 10px;
+    }
+}
