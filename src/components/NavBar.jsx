@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 
-import styles from "./NavBar.module.scss"
+import styles from "./../styles/NavBar.module.scss"
 
 import { BiMenuAltRight } from "react-icons/bi"
 import { AiOutlineCloseSquare, AiOutlineShoppingCart } from "react-icons/ai"

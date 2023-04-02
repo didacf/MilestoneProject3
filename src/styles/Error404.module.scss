@@ -1,0 +1,31 @@
+@import './variables.scss';
+
+body{
+    background: url(../../public/pictures/pexels-oleksandr-pidvalnyi-1004584.jpg);
+    background-size: cover;
+}
+
+.container{
+    @include containerDef;
+    
+    width: 300px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 30vh;
+    padding: 20px;
+    text-align: center;
+}
+
+.content{
+    color: $text2;
+    &__button{
+        text-decoration: none;
+        color: inherit;
+        border: 1px solid $bg;
+        transition: 0.3s ease color;
+        padding: 4px;
+        &:hover {
+            color: $primary;
+        }
+    }
+}
