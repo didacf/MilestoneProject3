@@ -1,10 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Error404 from './pages/Error404';
+import Signup from './pages/Signup';
 
 function App() {
   return (
-    <Error404/>
+    <Signup/>
   );
 }
 
