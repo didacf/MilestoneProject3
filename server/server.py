@@ -35,17 +35,14 @@ db = SQLAlchemy(app)
 
 class Event(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(80), nullable=False)
-    email = db.Column(db.String(120), unique=True, nullable=False)
+    description = db.Column(db.String(80), nullable=False)
+    created_at = db.Column(db.String(120), nullable=False, default="1/2/3")
     
     def __repr__(self):
         return f"Event:{self.description}"
     
     def __init__(self, description):
         self.description = description
-
-if __name__ == "__main__":
-    app.run(debug=FLASK_DEBUG)
 
 def format_event(event):
     return {
@@ -70,6 +67,6 @@ def create_event():
     db.session.add(event)
     db.session.commit()
     return format_event(event)
-    
-if __name__ == '__main__':
-    app.run()
+
+if __name__ == "__main__":
+    app.run(debug=True)
