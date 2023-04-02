@@ -1,6 +1,7 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
+import requests
 from dotenv import load_dotenv
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 import os
 import psycopg2
 from flask_sqlalchemy import SQLAlchemy
@@ -15,7 +16,7 @@ DB_PASSWORD = os.getenv("DB_PASSWORD")
 # defining app and server
 app = Flask(__name__)
 CORS(app)
-
+# CORS(app, supports_credentials=True, origins='http://localhost:3000', allowed_headers=['Content-Type', 'Authorization'])
 
 
 # Database connection:
@@ -52,14 +53,19 @@ def format_event(event):
     }
 #routes
 
+
 @app.route("/members")
 def members():
     return{"members": ["Member1","Member2","Member3"]}
 
 @app.route('/')
 def hello():
-    return "Hey!"
+    return "Hey!;"
 
+
+
+
+#Create an event
 @app.route("/event", methods = ["POST"])
 def create_event():
     description = request.json['description']
@@ -68,5 +74,35 @@ def create_event():
     db.session.commit()
     return format_event(event)
 
+#get all events
+@app.route("/event", methods = ['GET'])
+def get_events():
+    events = Event.query.order_by(Event.id.asc()).all()
+    event_list = []
+    for event in events:
+        event_list.append(format_event(event))
+    return {'events':event_list}
+
+@app.route("/add_user", methods=['POST'])
+def add_user():
+    print("yo")
+    print(request.form)
+    # description = request.form['description']
+    # email = request.form['email']
+
+    # cur = conn.cursor()
+    # cur.execute("INSERT INTO event (description, created_at) VALUES (%s, %s)", (description, email))
+    # conn.commit()
+    # cur.close()
+    # conn.close()
+    return 'User added successfully'
+
 if __name__ == "__main__":
     app.run(debug=True)
+
+
+
+
+
+
+

@@ -4,6 +4,7 @@ from flask_cors import CORS
 import os
 import psycopg2
 from flask_sqlalchemy import SQLAlchemy
+import requests
 load_dotenv()
 # enviorment variable assignment
 FLASK_DEBUG = os.getenv("FLASK_DEBUG")
@@ -14,34 +15,19 @@ DB_PASSWORD = os.getenv("DB_PASSWORD")
 app = Flask(__name__)
 CORS(app)
 
+url = "https://skyscanner50.p.rapidapi.com/api/v1/searchFlights"
 
-# Database connection:
+querystring = {"origin":"LOND","destination":"NYCA","date":"<REQUIRED>","adults":"1","currency":"USD","countryCode":"US","market":"en-US"}
 
-conn = psycopg2.connect(
-        host="localhost",
-        database="ms3_flights",
-        user=DB_USERNAME,
-        password=DB_PASSWORD)
+headers = {
+	"X-RapidAPI-Key": "673cd5f30amsh23e878dc6ccc272p1223f6jsn720ad90640aa",
+	"X-RapidAPI-Host": "skyscanner50.p.rapidapi.com"
+}
 
-# Basic server function:
+response = requests.request("GET", url, headers=headers, params=querystring)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:password@localhost/ms3_flights'
-db = SQLAlchemy(app)
+print(response.text)
 
-class Event(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    description = db.Column(db.String(100), nullable=False)
-    created_at = db.Column(db.DateTime, nullable=False, default=1/1/2003)
-    
-    def __repr__(self):
-        return f"Event:{self.description}"
-    
-    def __init__(self, description):
-        self.description = description
-
-@app.route('/')
-def hello():
-    return "Hey!"
 
 if __name__ == '__main__':
     app.run()

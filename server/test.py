@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 from flask_cors import CORS
 import os
 import psycopg2
+from flask_sqlalchemy import SQLAlchemy
 # enviorment variable assignment
 load_dotenv()
 
