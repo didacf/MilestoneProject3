@@ -12,7 +12,7 @@ $spacing-sm: 8px;
 $spacing-md: 16px;
 $spacing-lg: 32px;
 
-$header-height: 72px;
+$header-height: 69px;
 
 $sm: 37.5em;
 $md: 48em;
@@ -27,3 +27,19 @@ $xl: 75em;
     }
 }
 
+$fw: 350px;
+$fh: 40px;
+$ffs: 20px;
+
+@mixin align (){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin containerDef(){
+    background: rgba($bg2, 0.80); 
+    font-family: inherit;
+    box-shadow: 0 1px 5px $primary;
+    color: $text2;
+}

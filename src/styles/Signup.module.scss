@@ -1,0 +1,49 @@
+@import "./../styles/variables.scss";
+
+body{
+    background: url(../../public/pictures/pexels-oleksandr-pidvalnyi-1008155.jpg);
+    background-size: cover;
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 100px;
+}
+
+.form{
+    
+    display: block;
+    @include containerDef;
+
+    &__title{
+        padding-top: 10px;
+        font-size: 26px;
+        font-weight: 700;
+        color: $text2;
+        @include align;
+    }
+    
+    &__item{
+        display: block;
+        width: $fw;
+        height: $fh;
+        margin: 20px;
+        border: none;
+        outline: none;
+        border-bottom: 1px solid $text;
+    }
+
+    &__buttonContainer{
+        @include align;
+        padding-bottom: 20px;
+    }
+
+    &__button{
+        width: 250px;
+        height: $fh;
+        
+        
+    }
+}

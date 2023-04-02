@@ -1,22 +1,20 @@
 import React from 'react'
 import NavBar from '../components/NavBar'
-import styles from "./Login.module.scss"
+import styles from "../styles/Signup.module.scss"
 
 const Login = () => {
   return (
     <>
-        <div>
-            <h2>Login</h2>
+      <NavBar/>
+        <div className={styles.container}>
+            
             <form className={styles.form}>
-                <label for="email">email:</label>
-                <br/>
-                <input type={"text"} id="email" name="email"/>
-                <br/>
-                <label for="password">Password:</label>
-                <br/>
-                <input type={"text"} id="password" name="password"/>
-                <br/>
-                <input type={"submit"} value="Login"/>
+              <h2 className={styles.form__title}>Login</h2>
+              <input type={"text"} id="email" name="email" className={styles.form__item} placeholder='Email'/>
+              <input type={"text"} id="password" name="password" className={styles.form__item} placeholder='Password'/>
+              <div className={styles.form__buttonContainer}>  
+                <input type={"submit"} className={styles.form__button} value="Login"/>
+              </div>
             </form>
         </div>
     </>
