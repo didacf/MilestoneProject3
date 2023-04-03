@@ -5,6 +5,7 @@ import Search from './components/Search'
 import NavBar from './components/NavBar'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
+import Error404 from './pages/Error404';
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
   <Route path="/search" element={<Search />} />
   <Route path="/Login" element={<Login />} />
   <Route path="/Signup" element={<Signup />} />
+  <Route path='/*' element={<Error404 />} />
   </Routes>
   </Router>
   </div>
