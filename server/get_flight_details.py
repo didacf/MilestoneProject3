@@ -2,7 +2,7 @@ import requests
 
 url = "https://skyscanner50.p.rapidapi.com/api/v1/getFlightDetails"
 
-querystring = {"itineraryId":"13416-2304032045--32540-1-13870-2304042345|13870-2304140940--32540-2-13416-2304142245","legs":"[{\"origin\":\"LAX\",\"destination\":\"MAD\",\"date\":\"2023-04-03\"},{\"date\":\"2023-04-14\",\"destination\":\"LAX\",\"origin\":\"MAD\"}]","adults":"1","currency":"USD","countryCode":"US","market":"en-US"}
+querystring = {"itineraryId":"16409-2304041915--32573-0-15343-2304042040|15343-2304081039--32573-0-16409-2304081204","legs":"[{\"origin\":\"SNA\",\"destination\":\"PHX\",\"date\":\"2023-04-04\"},{\"date\":\"2023-04-08\",\"destination\":\"SNA\",\"origin\":\"PHX\"}]","adults":"1","currency":"USD","countryCode":"US","market":"en-US"}
 
 headers = {
 	"X-RapidAPI-Key": "673cd5f30amsh23e878dc6ccc272p1223f6jsn720ad90640aa",
