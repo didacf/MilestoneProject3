@@ -1,0 +1,25 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+*,
+*::before,
+*::after {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  color: rgb(15, 15, 15);
+  height: 100vh;
+}
+
+button {
+  font-family: inherit;
+  outline: none;
+  border: none;
+  background: none;
+  letter-spacing: none;
+  color: inherit;
+  font-size: inherit;
+  text-align: inherit;
+  padding: 0;
+}/*# sourceMappingURL=index.css.map */
