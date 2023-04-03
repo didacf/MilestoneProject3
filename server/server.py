@@ -5,6 +5,7 @@ from flask_cors import CORS, cross_origin
 import os
 import psycopg2
 from flask_sqlalchemy import SQLAlchemy
+import json
 
 load_dotenv()
 # enviorment variable assignment
@@ -20,11 +21,6 @@ CORS(app)
 
 
 # Database connection:
-conn = psycopg2.connect(
-        host="localhost",
-        database="ms3_flights",
-        user=DB_USERNAME,
-        password=DB_PASSWORD)
 
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:password@localhost/ms3_flights'
@@ -65,36 +61,45 @@ def hello():
 
 
 
-#Create an event
-@app.route("/event", methods = ["POST"])
-def create_event():
-    description = request.json['description']
-    event = Event(description)
-    db.session.add(event)
-    db.session.commit()
-    return format_event(event)
+# #Create an event
+# @app.route("/event", methods = ["POST"])
+# def create_event():
+#     description = request.json['description']
+#     event = Event(description)
+#     db.session.add(event)
+#     db.session.commit()
+#     return format_event(event)
 
-#get all events
-@app.route("/event", methods = ['GET'])
-def get_events():
-    events = Event.query.order_by(Event.id.asc()).all()
-    event_list = []
-    for event in events:
-        event_list.append(format_event(event))
-    return {'events':event_list}
+# #get all events
+# @app.route("/event", methods = ['GET'])
+# def get_events():
+#     events = Event.query.order_by(Event.id.asc()).all()
+#     event_list = []
+#     for event in events:
+#         event_list.append(format_event(event))
+#     return {'events':event_list}
 
 @app.route("/add_user", methods=['POST'])
 def add_user():
-    print("yo")
-    print(request.form)
-    # description = request.form['description']
+    print(request.get_json())
+
+
+    data = request.get_json()
+    description = (data["fName"])
     # email = request.form['email']
 
-    # cur = conn.cursor()
-    # cur.execute("INSERT INTO event (description, created_at) VALUES (%s, %s)", (description, email))
-    # conn.commit()
-    # cur.close()
-    # conn.close()
+    conn = psycopg2.connect(
+        host="localhost",
+        database="ms3_flights",
+        user=DB_USERNAME,
+        password=DB_PASSWORD)
+
+
+    cur = conn.cursor()
+    cur.execute("INSERT INTO event (fName, lName, email, password) VALUES (%s, %s, %s, %s)", (data["fName"],data["lName"],data["email"],data["password"] ))
+    conn.commit()
+    cur.close()
+    conn.close()
     return 'User added successfully'
 
 if __name__ == "__main__":

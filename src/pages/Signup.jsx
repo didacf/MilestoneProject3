@@ -7,10 +7,20 @@ const Signup = () => {
 
   const [userData, setUserData] = useState({fName:'', lName:'', email:'', password:''})
 
-  function handleSubmit(e){
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(userData)
-  }
+    const response = await fetch('http://localhost:5000/add_user', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(userData)
+    });
+    const data = await response.json();
+    
+  };
+
+
 
 
   return (
