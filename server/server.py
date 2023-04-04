@@ -61,23 +61,24 @@ def hello():
 
 
 
-# #Create an event
-# @app.route("/event", methods = ["POST"])
-# def create_event():
-#     description = request.json['description']
-#     event = Event(description)
-#     db.session.add(event)
-#     db.session.commit()
-#     return format_event(event)
+#Create an event
+#@app.route("/event", methods = ["POST"])
+#def create_event():
+#   description = request.json['description']
+#   event = Event(description)
+#   db.session.add(event)
+#   db.session.commit()
+#   return format_event(event)
 
-# #get all events
-# @app.route("/event", methods = ['GET'])
-# def get_events():
-#     events = Event.query.order_by(Event.id.asc()).all()
-#     event_list = []
-#     for event in events:
-#         event_list.append(format_event(event))
-#     return {'events':event_list}
+#get all events
+#@app.route("/event", methods = ['GET'])
+#def get_events():
+   # events = Event.query.order_by(Event.id.asc()).all()
+   # event_list = []
+    #for event in events:
+    #   event_list.append(format_event(event))
+    #return {'events':event_list}
+
 
 @app.route("/add_user", methods=['POST'])
 def add_user():
