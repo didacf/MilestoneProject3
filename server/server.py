@@ -6,6 +6,11 @@ import os
 import psycopg2
 from flask_sqlalchemy import SQLAlchemy
 import json
+from flask_login import LoginManager, UserMixin
+# from flask_wtf import wtforms
+from wtforms import StringField, PasswordField, SubmitField
+from wtforms.validators import InputRequired, Length, ValidationError
+
 
 load_dotenv()
 # enviorment variable assignment
@@ -17,18 +22,23 @@ DB_PASSWORD = os.getenv("DB_PASSWORD")
 # defining app and server
 app = Flask(__name__)
 CORS(app)
-# CORS(app, supports_credentials=True, origins='http://localhost:3000', allowed_headers=['Content-Type', 'Authorization'])
-
-
-# Database connection:
-
-
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:password@localhost/ms3_flights'
+app.config['SECRET_KEY'] = 'password'
 db = SQLAlchemy(app)
+login_manager = LoginManager()
+login_manager.init_app(app)
 
 
 
 #Database models
+
+class User(db.Model, UserMixin):
+    id = db.Column(db.Integer, primary_key=True)
+    password = db.Column(db.String(80), nullable=False) 
+    firstname = db.Column(db.String(20), nullable=False) 
+    lastname = db.Column(db.String(20), nullable=False) 
+    email = db.Column(db.String(80), nullable=False, unique = True) 
+
 
 class Event(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -47,17 +57,23 @@ def format_event(event):
         "id": event.id,
         "created_at": event.created_at
     }
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
+
 #routes
 
-
-@app.route("/members")
-def members():
-    return{"members": ["Member1","Member2","Member3"]}
+@app.route("/login")
+def login():
+    user = User.query.filter_by(username="Anthony").first()
+    
 
 @app.route('/')
 def hello():
     return "Hey!;"
-
 
 
 
@@ -80,14 +96,12 @@ def hello():
     #return {'events':event_list}
 
 
-@app.route("/add_user", methods=['POST'])
+@app.route("/add_user", methods=['POST', "GET"])
 def add_user():
+
     print(request.get_json())
 
-
     data = request.get_json()
-    description = (data["fName"])
-    # email = request.form['email']
 
     conn = psycopg2.connect(
         host="localhost",
@@ -95,13 +109,21 @@ def add_user():
         user=DB_USERNAME,
         password=DB_PASSWORD)
 
+    existing_email = User.query.filter(
+         User.email == data["email"]).first()
+    if (existing_email):
+        existing = True
+        return jsonify(existing)
+    else:
+        cur = conn.cursor()
+        cur.execute("INSERT INTO \"user\" (firstname, lastname, email, password) VALUES (%s, %s, %s, %s)", (data["firstname"],data["lastname"],data["email"],data["password"], ))
+        conn.commit()
+        cur.close()
+        conn.close()
+        existing = False
+        return jsonify(existing) 
+    
 
-    cur = conn.cursor()
-    cur.execute("INSERT INTO event (fName, lName, email, password) VALUES (%s, %s, %s, %s)", (data["fName"],data["lName"],data["email"],data["password"] ))
-    conn.commit()
-    cur.close()
-    conn.close()
-    return 'User added successfully'
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -5,10 +5,13 @@ import { useState, useEffect } from 'react'
 
 const Signup = () => {
 
-  const [userData, setUserData] = useState({fName:'', lName:'', email:'', password:''})
-
+  const [userData, setUserData] = useState({firstname:'', lastname:'', email:'', password:''})
+  const [isDuplicate, setisDuplicate] = useState(false)
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+
+    
     const response = await fetch('http://localhost:5000/add_user', {
       method: 'POST',
       headers: {
@@ -17,6 +20,16 @@ const Signup = () => {
       body: JSON.stringify(userData)
     });
     const data = await response.json();
+
+    fetch('http://localhost:5000/add_user')
+    .then(response => response.json())
+    .then(data => setisDuplicate(data))
+    .catch(error => console.error(error));
+
+    if (isDuplicate==true){
+      console.log("DUPLICATE")
+    }
+
     
   };
 
@@ -30,13 +43,13 @@ const Signup = () => {
             
             <form onSubmit={(e) => handleSubmit(e, userData)} className={styles.form}>
             <h2 className={styles.form__title}>Signup</h2>                
-                <input type={"text"} id="fName" name="fName" className={styles.form__item} placeholder='First Name'
-                  value = {userData.fName}
-                  onChange={e => setUserData({...userData, fName: e.target.value})}
+                <input type={"text"} id="firstname" name="firstname" className={styles.form__item} placeholder='First Name'
+                  value = {userData.firstname}
+                  onChange={e => setUserData({...userData, firstname: e.target.value})}
                 />                
-                <input type={"text"} id="lName" name="lName" className={styles.form__item} placeholder='Last Name'
-                  value = {userData.lName}
-                  onChange={e => setUserData({...userData, lName: e.target.value})}  
+                <input type={"text"} id="lastname" name="lastname" className={styles.form__item} placeholder='Last Name'
+                  value = {userData.lastname}
+                  onChange={e => setUserData({...userData, lastname: e.target.value})}  
                 /> 
                 
                 <input type={"text"} id="email" name="email" className={styles.form__item} placeholder='Email'
