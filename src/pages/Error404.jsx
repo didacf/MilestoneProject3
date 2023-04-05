@@ -6,7 +6,6 @@ const Error404 = () => {
     <>
       <div className={styles.container}>
         <h1 className={styles.content}>Error404</h1>
-        
         <h2 className={styles.content}>Oops! This Page Does Not Exist!</h2>
         <a href='./' className={styles.content__button}>Return Home</a>
       </div>
