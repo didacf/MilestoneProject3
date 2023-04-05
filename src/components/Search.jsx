@@ -1,7 +1,8 @@
 import React from 'react'
 import styles from './../styles/Search.module.scss'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import axios from 'axios'
+import FlightCard from './FlightCard'
 
 const Search = () => {
 
@@ -25,24 +26,11 @@ const Search = () => {
 
     const [flights, setFlights] = useState({})
 
-    const [reqData2, setreqData2] = useState({
-      method: 'GET',
-      url: 'https://skyscanner50.p.rapidapi.com/api/v1/getFlightDetails',
-      params: {
-        itineraryId: '',
-        legs: '[{"origin":"LOND","destination":"NYCA","date":"2023-02-07"},{"date":"2023-02-14","destination":"LOND","origin":"NYCA"}]',
-        adults: '1',
-        currency: 'USD',
-        countryCode: 'US',
-        market: 'en-US'
-      },
-      headers: {
-        'X-RapidAPI-Key': process.env.REACT_APP_X_RAPIDAPI_KEY,
-        'X-RapidAPI-Host': process.env.REACT_APP_X_RAPID_API_HOST
-      }
+    
+    useEffect(()=>{
+      console.log(flights)
     })
-  
-
+    
     function handleSubmit(e){
     e.preventDefault();
     console.log(inputs)
@@ -59,12 +47,9 @@ const Search = () => {
     ).catch(function (error) {
       console.error(error);
     })
-    /*.then(axios.request(options).then(function (response) {
-      console.log(response.data);
-    }).catch(function (error) {
-      console.error(error);
-    }))*/
   }
+
+  
 
   return (
     <div className={styles.container}>
@@ -87,8 +72,12 @@ const Search = () => {
         />
         <input type={"submit"} value={"Submit"}/>
       </form>
-      
-
+      <div>
+    {flights.data 
+    ? flights.data.map((item, index) => {
+      return <FlightCard item={item} key={index} />
+  }) : <div></div>}
+      </div>
     </div>
   )
 }
