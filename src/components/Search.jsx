@@ -33,6 +33,7 @@ const Search = () => {
     
     function handleSubmit(e){
     e.preventDefault();
+    setFlights({})
     console.log(inputs)
     reqData.params.origin = inputs.origin
     reqData.params.destination = inputs.destination
