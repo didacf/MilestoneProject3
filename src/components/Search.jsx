@@ -29,7 +29,7 @@ const Search = () => {
     
     useEffect(()=>{
       console.log(flights)
-    })
+    },[inputs.origin, inputs.destination])
     
     function handleSubmit(e){
     e.preventDefault();
