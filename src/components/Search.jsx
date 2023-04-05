@@ -1,7 +1,8 @@
 import React from 'react'
 import styles from './../styles/Search.module.scss'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import axios from 'axios'
+import FlightCard from './FlightCard'
 
 const Search = () => {
 
@@ -22,6 +23,12 @@ const Search = () => {
     }
 
     const [inputs, setInputs] = useState({})
+    const [flights, setFlights] = useState({})
+
+    
+    useEffect(()=>{
+      console.log(flights)
+    },[inputs.origin, inputs.destination])
   
 
   function handleSubmit(e){
@@ -60,6 +67,12 @@ const Search = () => {
         />
         <input type={"submit"} value={"Submit"}/>
       </form>
+      <div>
+      {flights.data 
+    ? flights.data.map((item, index) => {
+      return <FlightCard item={item} key={index} />
+  }) : <div></div>}
+      </div>
     </div>
   )
 }
