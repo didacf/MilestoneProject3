@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import FlightCard from "./FlightCard";
 import SearchLocation from "./SearchLocation";
+import { OriginContext } from "../context/DataContext";
 
 const Search = () => {
   let reqData = {
@@ -23,6 +24,8 @@ const Search = () => {
 
   const [inputs, setInputs] = useState({});
 
+  const [origin, setOrigin] = useState();
+
   const [flights, setFlights] = useState({});
 
   useEffect(() => {
@@ -33,7 +36,7 @@ const Search = () => {
     e.preventDefault();
     setFlights({});
     console.log(inputs);
-    reqData.params.origin = inputs.origin;
+    reqData.params.origin = origin;
     reqData.params.destination = inputs.destination;
     reqData.params.date = inputs.date;
     reqData.params.returnDate = inputs.returnDate;
@@ -56,9 +59,10 @@ const Search = () => {
           className={styles.form__item}
           type={"text"}
           placeholder="From"
-          value={inputs.origin}
-          onChange={(e) => setInputs({ ...inputs, origin: e.target.value })}
+          value={origin}
+          onChange={(e) => setOrigin(e.target.value)}
         />
+
         <input
           className={styles.form__item}
           type={"text"}
@@ -93,8 +97,6 @@ const Search = () => {
           <div></div>
         )}
       </div>
-
-      <SearchLocation term={inputs.origin} />
     </div>
   );
 };

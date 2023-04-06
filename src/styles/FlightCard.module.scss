@@ -74,9 +74,15 @@
     top: 50%;
     left: 20%;
 
-    &:hover {
-        color: $primary;
-    }
+    text-decoration: none;
+        color: inherit;
+        border: 1px solid $bg;
+        border-radius: 2px;
+        transition: 0.3s ease color;
+        padding: 4px;
+        &:hover {
+            color: $primary;
+        }
 }
 
 .price{

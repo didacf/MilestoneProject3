@@ -1,10 +1,11 @@
 import React from "react";
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import AirportsDisplay from "./AirportsDisplay";
+import { OriginContext } from "../context/DataContext";
 
 const SearchLocation = (props) => {
-  const term = props.term;
+  const term = useContext(OriginContext);
 
   const [airports, setAirports] = useState({});
 
