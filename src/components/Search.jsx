@@ -91,7 +91,9 @@ const Search = () => {
       <div>
         {flights.data ? (
           flights.data.map((item, index) => {
-            return <FlightCard item={item} key={index} />;
+            return (
+              <FlightCard item={item} key={index} buttonText="Add to Cart" />
+            );
           })
         ) : (
           <div></div>

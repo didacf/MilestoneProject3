@@ -14,14 +14,16 @@ const FlightCard = (props) => {
   let arr2 = data.legs[1].arrival.slice(11, 16);
 
   const [added, setAdded] = useState({});
+  const [hide, setHide] = useState("inherit");
 
   function addToCart() {
+    setHide("none");
     setAdded(data);
     console.log(added);
   }
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} style={{ display: hide }}>
       <div className={styles.dep}>
         <div className={styles.flight__carrier}>
           <p>{data.legs[0].carriers[0].name}</p>
@@ -79,7 +81,7 @@ const FlightCard = (props) => {
       <div className={styles.buttonContainer}>
         <p className={styles.price}>${data.price.amount}</p>
         <button className={styles.button} onClick={addToCart}>
-          Add To Cart
+          {props.buttonText}
         </button>
       </div>
     </div>
