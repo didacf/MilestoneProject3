@@ -5,23 +5,41 @@ import { useState, useEffect } from "react";
 
 const Signup = () => {
   const [userData, setUserData] = useState({
-    fName: "",
-    lName: "",
+    firstname: "",
+    lastname: "",
     email: "",
     conEmail: "",
     password: "",
     conPassword: "",
   });
 
-  function handleSubmit(e) {
+  const [isDuplicate, setisDuplicate] = useState()
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(userData);
     if (userData.email !== userData.conEmail) {
       alert("emails do not match");
     } else if (userData.password !== userData.conPassword) {
       alert("passwords do not match");
     }
+    else{
+    const response = await fetch('http://localhost:5000/add_user', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(userData)
+    });
+    const data = await response.json()
+    setisDuplicate(data)
+    if (isDuplicate==true){
+      console.log("DUPLICATE")
+    }
+    else{console.log(isDuplicate)}
   }
+  };
+
+
+
 
   return (
     <>
@@ -34,25 +52,25 @@ const Signup = () => {
           <h2 className={styles.form__title}>Signup</h2>
           <input
             type={"text"}
-            id="fName"
-            name="fName"
+            id="firstname"
+            name="firstname"
             className={styles.form__item}
             placeholder="First Name"
-            value={userData.fName}
+            value={userData.firstname}
             onChange={(e) =>
-              setUserData({ ...userData, fName: e.target.value })
+              setUserData({ ...userData, firstname: e.target.value })
             }
             required
           />
           <input
             type={"text"}
-            id="lName"
-            name="lName"
+            id="lastname"
+            name="lastname"
             className={styles.form__item}
             placeholder="Last Name"
-            value={userData.lName}
+            value={userData.lastname}
             onChange={(e) =>
-              setUserData({ ...userData, lName: e.target.value })
+              setUserData({ ...userData, lastname: e.target.value })
             }
             required
           />
@@ -120,3 +138,4 @@ const Signup = () => {
 };
 
 export default Signup;
+
