@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react'
 const Signup = () => {
 
   const [userData, setUserData] = useState({firstname:'', lastname:'', email:'', password:''})
-  const [isDuplicate, setisDuplicate] = useState(false)
+  const [isDuplicate, setisDuplicate] = useState()
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -19,18 +19,25 @@ const Signup = () => {
       },
       body: JSON.stringify(userData)
     });
-    const data = await response.json();
-
-    fetch('http://localhost:5000/add_user')
-    .then(response => response.json())
-    .then(data => setisDuplicate(data))
-    .catch(error => console.error(error));
-
+    const data = await response.json()
+    setisDuplicate(data)
     if (isDuplicate==true){
       console.log("DUPLICATE")
     }
+    else{console.log(isDuplicate)}
 
-    
+    // fetch('http://localhost:5000/add_user',{
+    //   method: 'POST',
+    //   body: JSON.stringify(data),
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   }
+    // })
+    // .then(response => response.json())
+    // .then(existing => setisDuplicate(existing))
+    // .catch(error => console.error(error));
+
+
   };
 
 

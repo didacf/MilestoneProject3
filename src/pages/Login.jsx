@@ -7,9 +7,17 @@ const Login = () => {
 
   const [userData, setUserData] = useState({email:'', password:''})
 
-  function handleSubmit(e){
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(userData)
+    const response = await fetch('http://localhost:5000/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(userData)
+    });
+    const data = await response.json()
+  
   }
 
   return (

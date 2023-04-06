@@ -6,7 +6,7 @@ import os
 import psycopg2
 from flask_sqlalchemy import SQLAlchemy
 import json
-from flask_login import LoginManager, UserMixin
+from flask_login import LoginManager, UserMixin, login_user, current_user, login_required, logout_user
 # from flask_wtf import wtforms
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import InputRequired, Length, ValidationError
@@ -38,6 +38,8 @@ class User(db.Model, UserMixin):
     firstname = db.Column(db.String(20), nullable=False) 
     lastname = db.Column(db.String(20), nullable=False) 
     email = db.Column(db.String(80), nullable=False, unique = True) 
+    def get_id(self):
+        return str(self.id)
 
 
 class Event(db.Model):
@@ -58,23 +60,18 @@ def format_event(event):
         "created_at": event.created_at
     }
 
-
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
 
 
 #routes
-
-@app.route("/login")
-def login():
-    user = User.query.filter_by(username="Anthony").first()
-    
-
-@app.route('/')
-def hello():
-    return "Hey!;"
-
+@app.route("/log")
+def log():
+    user = load_user(10)
+    login_user(user)
+    print(current_user.password)
+    return "user logged in"
 
 
 #Create an event
@@ -94,9 +91,32 @@ def hello():
     #for event in events:
     #   event_list.append(format_event(event))
     #return {'events':event_list}
+@app.route("/login", methods=["POST"])
+def login():
+    data = request.get_json()
+
+    email = User.query.filter(
+         User.email == data["email"]).first()
+    password = User.query.filter(
+        User.password == data["password"]).first()
+    print(password.password, email.password)
+    if (data['password'] == email.password):
+        login_status= {"logged_in": True}
+        print(login_status)
+        user = load_user(email.id)
+        login_user(user)
+        
+        return login_status
+    else:
+        login_status= {"logged_in": False}
+        print(login_status)
+        return login_status
+    
 
 
-@app.route("/add_user", methods=['POST', "GET"])
+
+
+@app.route("/add_user", methods=['POST'])
 def add_user():
 
     print(request.get_json())
@@ -112,7 +132,7 @@ def add_user():
     existing_email = User.query.filter(
          User.email == data["email"]).first()
     if (existing_email):
-        existing = True
+        existing = {"status": True}
         return jsonify(existing)
     else:
         cur = conn.cursor()
@@ -120,10 +140,14 @@ def add_user():
         conn.commit()
         cur.close()
         conn.close()
-        existing = False
+        existing = {"status": False}
         return jsonify(existing) 
     
-
+@app.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    return "logout"
 
 if __name__ == "__main__":
     app.run(debug=True)
