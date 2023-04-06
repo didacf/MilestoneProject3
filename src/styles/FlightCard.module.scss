@@ -1,1 +1,71 @@
-@import './variables.scss'
+@import './variables.scss';
+
+.container{
+    @include containerDef;
+    margin-top: 10px;
+    @include align;
+    position: relative;
+    height: 125px;
+    max-width: 625px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.dep{
+    position: absolute;
+    top:0%;
+    left:0%;
+    height: 50%;
+    width: 75%;
+    border-bottom: 1px solid $primary;
+}
+
+.ret{
+    position: absolute;
+    bottom:0%;
+    left:0%;
+    height: 50%;
+    width: 75%;
+    
+}
+
+.flight{
+    
+
+    &__carrier{
+        position: absolute;
+        left: 5%;
+        top: 25%
+    }
+
+    &__dep{
+        @include align;
+        display: block;
+        position: absolute;
+        left: 30%;
+        top: 15%
+    }
+
+    &__time{
+        position: absolute;
+        left:55%;
+        top: 15%
+    }
+
+    &__arr{
+        position: absolute;
+        left: 80%;
+        top: 15%
+    }
+
+
+}
+
+.buttonContainer{
+    @include align;
+    position: absolute;
+    height: 100%;
+    width: 25%;
+    right: 0%;
+    border-left: 1px solid $primary;
+}
