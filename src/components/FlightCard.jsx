@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./../styles/FlightCard.module.scss";
 
 const FlightCard = (props) => {
@@ -12,6 +12,13 @@ const FlightCard = (props) => {
   let min2 = data.legs[1].duration % 60;
   let dep2 = data.legs[1].departure.slice(11, 16);
   let arr2 = data.legs[1].arrival.slice(11, 16);
+
+  const [added, setAdded] = useState({});
+
+  function addToCart() {
+    setAdded(data);
+    console.log(added);
+  }
 
   return (
     <div className={styles.container}>
@@ -39,7 +46,7 @@ const FlightCard = (props) => {
         </div>
         <div className={styles.flight__arr}>
           <p>{arr}</p>
-          <p>{data.legs[1].destination.alt_id}</p>
+          <p>{data.legs[0].destination.alt_id}</p>
         </div>
       </div>
       <div className={styles.ret}>
@@ -70,7 +77,10 @@ const FlightCard = (props) => {
         </div>
       </div>
       <div className={styles.buttonContainer}>
-        <button className={styles.button}>Add To Cart</button>
+        <p className={styles.price}>${data.price.amount}</p>
+        <button className={styles.button} onClick={addToCart}>
+          Add To Cart
+        </button>
       </div>
     </div>
   );
