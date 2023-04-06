@@ -5,22 +5,23 @@ import { useState, useEffect } from "react";
 
 const Signup = () => {
   const [userData, setUserData] = useState({
-    fName: "",
-    lName: "",
+    firstname: "",
+    lastname: "",
     email: "",
     conEmail: "",
     password: "",
     conPassword: "",
   });
 
-<<<<<<< HEAD
-  const [userData, setUserData] = useState({firstname:'', lastname:'', email:'', password:''})
   const [isDuplicate, setisDuplicate] = useState()
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-
-    
+    if (userData.email !== userData.conEmail) {
+      alert("emails do not match");
+    } else if (userData.password !== userData.conPassword) {
+      alert("passwords do not match");
+    }
+    else{
     const response = await fetch('http://localhost:5000/add_user', {
       method: 'POST',
       headers: {
@@ -34,71 +35,14 @@ const Signup = () => {
       console.log("DUPLICATE")
     }
     else{console.log(isDuplicate)}
-
-    // fetch('http://localhost:5000/add_user',{
-    //   method: 'POST',
-    //   body: JSON.stringify(data),
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   }
-    // })
-    // .then(response => response.json())
-    // .then(existing => setisDuplicate(existing))
-    // .catch(error => console.error(error));
-
-
+  }
   };
 
 
-=======
-  function handleSubmit(e) {
-    e.preventDefault();
-    console.log(userData);
-    if (userData.email !== userData.conEmail) {
-      alert("emails do not match");
-    } else if (userData.password !== userData.conPassword) {
-      alert("passwords do not match");
-    }
-  }
->>>>>>> 7606ccddbf896bb2e30a0187e22c0a840a459d7d
+
 
   return (
     <>
-<<<<<<< HEAD
-        <NavBar/>
-        <div className={styles.container}>
-            
-            <form onSubmit={(e) => handleSubmit(e, userData)} className={styles.form}>
-            <h2 className={styles.form__title}>Signup</h2>                
-                <input type={"text"} id="firstname" name="firstname" className={styles.form__item} placeholder='First Name'
-                  value = {userData.firstname}
-                  onChange={e => setUserData({...userData, firstname: e.target.value})}
-                />                
-                <input type={"text"} id="lastname" name="lastname" className={styles.form__item} placeholder='Last Name'
-                  value = {userData.lastname}
-                  onChange={e => setUserData({...userData, lastname: e.target.value})}  
-                /> 
-                
-                <input type={"text"} id="email" name="email" className={styles.form__item} placeholder='Email'
-                  value = {userData.email}
-                  onChange={e => setUserData({...userData, email: e.target.value})}
-                />                
-                <input type={"text"} id="conEmail" name="conEmail" className={styles.form__item} placeholder='Confirm Email'/>                
-                
-                <input type={"password"} id="password" name="password" className={styles.form__item} placeholder='Password'
-                  value = {userData.password}
-                  onChange={e => setUserData({...userData, password: e.target.value})}
-                />  
-                <input type={"password"} id="conPassword" name="conPassword" className={styles.form__item} placeholder='Confirm Password'/>
-                <div className={styles.form__buttonContainer}>
-                <input type={"submit"} className={styles.form__button} value="Signup"/>
-                </div>
-            </form>
-        </div>
-    </>
-  )
-}
-=======
       <NavBar />
       <div className={styles.container}>
         <form
@@ -108,29 +52,28 @@ const Signup = () => {
           <h2 className={styles.form__title}>Signup</h2>
           <input
             type={"text"}
-            id="fName"
-            name="fName"
+            id="firstname"
+            name="firstname"
             className={styles.form__item}
             placeholder="First Name"
-            value={userData.fName}
+            value={userData.firstname}
             onChange={(e) =>
-              setUserData({ ...userData, fName: e.target.value })
+              setUserData({ ...userData, firstname: e.target.value })
             }
             required
           />
           <input
             type={"text"}
-            id="lName"
-            name="lName"
+            id="lastname"
+            name="lastname"
             className={styles.form__item}
             placeholder="Last Name"
-            value={userData.lName}
+            value={userData.lastname}
             onChange={(e) =>
-              setUserData({ ...userData, lName: e.target.value })
+              setUserData({ ...userData, lastname: e.target.value })
             }
             required
           />
->>>>>>> 7606ccddbf896bb2e30a0187e22c0a840a459d7d
 
           <input
             type={"text"}
@@ -195,3 +138,4 @@ const Signup = () => {
 };
 
 export default Signup;
+
