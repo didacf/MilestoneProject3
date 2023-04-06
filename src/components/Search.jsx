@@ -29,7 +29,7 @@ const Search = () => {
     
     useEffect(()=>{
       console.log(flights)
-    },)
+    })
 
     
     function handleSubmit(e){

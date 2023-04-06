@@ -5,8 +5,7 @@ Visit our current version here
 
 ## eFlights story
 
-Flight search website
-
+This final project for our SDSU software developers bootcamp, consists on a flights website, with authentication, shopping cart and others, leveraging RapidAPI's Skyscanner app.
 
 ## Details
 
