@@ -12,15 +12,22 @@ Flight search website
 
 # Technolgy
 
+<img src="https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white" height="30">
 
-. <img src="https://user-images.githubusercontent.com/25181517/183423775-2276e25d-d43d-4e58-890b-edbc88e915f7.png" height="20">
+<img src="https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white" height="30">
 
-. <img src="https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white" height="30">
+<img src="https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white height="30">
+
+<img src=https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAF height="30">
+
+<img src="https://img.shields.io/badge/SASS-hotpink.svg?style=for-the-badge&logo=SASS&logoColor=white" height = "30">
 
 # Contributors
 
 [Jonathan Kishi](https://github.com/Jkishi6)
+
 [Zane Larson](https://github.com/ZDC7096)
+
 [Didac Fernandez](https://www.github.com/didacf)
 
 # Getting Started with Create React App
