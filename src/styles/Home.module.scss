@@ -3,4 +3,10 @@
 body{
     background: url('../../public/pictures/pexels-pixabay-358220.jpg');
     background-size: cover;
+    background-attachment: fixed
+}
+
+.container{
+    @include align;
+    display: block;
 }
