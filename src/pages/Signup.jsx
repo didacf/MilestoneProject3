@@ -1,7 +1,7 @@
 import React from 'react'
 import NavBar from '../components/NavBar'
 import styles from "../styles/Signup.module.scss"
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 const Signup = () => {
 

@@ -4,14 +4,18 @@ import Search from '../components/Search'
 import styles from '../styles/Home.module.scss'
 import FlightCard from '../components/FlightCard'
 
+
 const Home = () => {
 
   return (
-    <>
-      <NavBar/>
-      <Search/>
-
-    </>
+  <div className={styles.container}>
+  <div>
+    <NavBar/>
+  </div>
+  <div>
+    <Search/>
+    </div>
+</div>
   )
 }
 
