@@ -39,7 +39,7 @@ const FlightCard = (props) => {
         </div>
         <div className={styles.flight__arr}>
           <p>{arr}</p>
-          <p>{data.legs[1].destination.alt_id}</p>
+          <p>{data.legs[0].destination.alt_id}</p>
         </div>
       </div>
       <div className={styles.ret}>
@@ -70,6 +70,7 @@ const FlightCard = (props) => {
         </div>
       </div>
       <div className={styles.buttonContainer}>
+        <p className={styles.price}>${data.price.amount}</p>
         <button className={styles.button}>Add To Cart</button>
       </div>
     </div>
