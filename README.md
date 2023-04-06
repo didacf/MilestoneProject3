@@ -13,9 +13,9 @@ Flight search website
 # Technolgy
 
 
-[alt text](https://user-images.githubusercontent.com/25181517/183423775-2276e25d-d43d-4e58-890b-edbc88e915f7.png)
+1. [react ] (183423775-2276e25d-d43d-4e58-890b-edbc88e915f7.png)<img src="https://user-images.githubusercontent.com/25181517/183423775-2276e25d-d43d-4e58-890b-edbc88e915f7.png" height="40">
 [alt text][image] 
-[image]:https://user-images.githubusercontent.com/25181517/117208740-bfb78400-adf5-11eb-97bb-09072b6bedfc.png
+[image](https://user-images.githubusercontent.com/25181517/117208740-bfb78400-adf5-11eb-97bb-09072b6bedfc.png)
 
 # Contributors
 
