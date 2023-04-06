@@ -1,3 +1,33 @@
+# eFlights App
+
+Visit our current version here
+
+
+# eFlights story
+
+Flight search website
+
+
+# Details
+
+# Technolgy
+
+. [logo]: https://user-images.githubusercontent.com/25181517/183897015-94a058a6-b86e-4e42-a37f-bf92061753e5.png
+. [logo]: https://user-images.githubusercontent.com/25181517/183568594-85e280a7-0d7e-4d1a-9028-c8c2209e073c.png]
+. [logo]: https://user-images.githubusercontent.com/25181517/192158956-48192682-23d5-4bfc-9dfb-6511ade346bc.png
+. [logo]: https://user-images.githubusercontent.com/25181517/183898674-75a4a1b1-f960-4ea9-abcb-637170a00a75.png
+. [logo]: https://user-images.githubusercontent.com/25181517/183898674-75a4a1b1-f960-4ea9-abcb-637170a00a75.png
+. [logo]: https://user-images.githubusercontent.com/25181517/183423775-2276e25d-d43d-4e58-890b-edbc88e915f7.png
+. [logo]: https://user-images.githubusercontent.com/25181517/117208740-bfb78400-adf5-11eb-97bb-09072b6bedfc.png
+. RapidAPI for SkyScanner
+. Python SQLAlchemy
+
+# Contributors
+
+[Jonathan Kishi]: https://github.com/Jkishi6
+[Zane Larson]: https://github.com/ZDC7096
+[Didac Fernandez]: https://www.github.com/didacf
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
