@@ -13,15 +13,15 @@ Flight search website
 # Technolgy
 
 
-![alt text] (https://user-images.githubusercontent.com/25181517/183423775-2276e25d-d43d-4e58-890b-edbc88e915f7.png)
-![alt text] [image] 
-[image]: https://user-images.githubusercontent.com/25181517/117208740-bfb78400-adf5-11eb-97bb-09072b6bedfc.png
+[alt text](https://user-images.githubusercontent.com/25181517/183423775-2276e25d-d43d-4e58-890b-edbc88e915f7.png)
+[alt text][image] 
+[image]:https://user-images.githubusercontent.com/25181517/117208740-bfb78400-adf5-11eb-97bb-09072b6bedfc.png
 
 # Contributors
 
-[ Jonathan Kishi ]: https://github.com/Jkishi6/
-[ Zane Larson ]: https://github.com/ZDC7096/
-[Didac Fernandez]: https://www.github.com/didacf
+[Jonathan Kishi](https://github.com/Jkishi6)
+[Zane Larson](https://github.com/ZDC7096)
+[Didac Fernandez](https://www.github.com/didacf)
 
 # Getting Started with Create React App
 
