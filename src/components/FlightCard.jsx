@@ -7,6 +7,7 @@ const FlightCard = (props) => {
     let hr = Math.trunc(data.legs[0].duration/60)
     let min = data.legs[0].duration%60
 
+
     return (
       <>
       <div className={styles.container}>
