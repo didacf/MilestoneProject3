@@ -32,3 +32,22 @@
         margin-right: 10px;
     }
 }
+
+.locationContainer{
+    position:relative;
+    
+    background: rgba($bg, 0.80); 
+    font-family: inherit;
+    box-shadow: 0 1px 5px $primary;
+    color: $text;
+    width: 8em;
+    top: 0%;
+    
+}
+
+.airportsDisplay{
+    font-size: 11.5px;
+    border: 1px solid black;
+    border-radius: 1px;
+    background-color: $bg;
+}

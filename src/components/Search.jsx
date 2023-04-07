@@ -25,19 +25,25 @@ const Search = () => {
   const [inputs, setInputs] = useState({});
 
   const [origin, setOrigin] = useState();
+  const [destination, setDestination] = useState();
 
   const [flights, setFlights] = useState({});
 
-  useEffect(() => {
-    console.log(flights);
-  }, [inputs.origin, inputs.destination]);
+  const dataTransfer = (value) => {
+    setOrigin(value);
+    console.log(origin);
+  };
+  const dataTransfer2 = (value) => {
+    setDestination(value);
+    console.log(destination);
+  };
 
   function handleSubmit(e) {
     e.preventDefault();
     setFlights({});
     console.log(inputs);
     reqData.params.origin = origin;
-    reqData.params.destination = inputs.destination;
+    reqData.params.destination = destination;
     reqData.params.date = inputs.date;
     reqData.params.returnDate = inputs.returnDate;
     console.log(reqData);
@@ -67,10 +73,8 @@ const Search = () => {
           className={styles.form__item}
           type={"text"}
           placeholder="To"
-          value={inputs.destination}
-          onChange={(e) =>
-            setInputs({ ...inputs, destination: e.target.value })
-          }
+          value={destination}
+          onChange={(e) => setDestination(e.target.value)}
         />
         <input
           className={styles.form__date}
@@ -88,6 +92,14 @@ const Search = () => {
         />
         <input type={"submit"} value={"Submit"} />
       </form>
+      <div style={{ display: "inline-block" }}>
+        <SearchLocation item={origin} left="8%" dataTransfer={dataTransfer} />
+        <SearchLocation
+          item={destination}
+          left="35%"
+          dataTransfer={dataTransfer2}
+        />
+      </div>
       <div>
         {flights.data ? (
           flights.data.map((item, index) => {
@@ -99,7 +111,6 @@ const Search = () => {
           <div></div>
         )}
       </div>
-      <SearchLocation item={origin} />
     </div>
   );
 };

@@ -2,12 +2,14 @@ import React from "react";
 import axios from "axios";
 import { useState, useEffect, useContext } from "react";
 import AirportsDisplay from "./AirportsDisplay";
-import { OriginContext } from "../context/DataContext";
+import styles from "./../styles/Search.module.scss";
 
 const SearchLocation = (props) => {
   const term = props.item;
 
   const [airports, setAirports] = useState({});
+
+  const [hide, setHide] = useState("");
 
   const options = {
     method: "GET",
@@ -24,6 +26,7 @@ const SearchLocation = (props) => {
       .request(options)
       .then(function (response) {
         console.log(response.data);
+        setHide("inherit");
         setAirports(response.data);
       })
       .catch(function (error) {
@@ -32,10 +35,20 @@ const SearchLocation = (props) => {
   }, [term]);
 
   return (
-    <div>
+    <div
+      className={styles.locationContainer}
+      style={{ display: hide, left: props.left }}
+    >
       {airports.data ? (
         airports.data.map((item, index) => {
-          return <AirportsDisplay item={item} key={index} />;
+          return (
+            <AirportsDisplay
+              item={item}
+              key={index}
+              dataTransfer={props.dataTransfer}
+              setHide={setHide}
+            />
+          );
         })
       ) : (
         <div></div>
