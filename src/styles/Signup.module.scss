@@ -49,3 +49,23 @@ body{
         
     }
 }
+
+.redirectContainer{
+    @include align;
+    padding-bottom:20px
+}
+
+.redirect{
+    text-decoration: none;
+    color: inherit;
+    border-bottom: 1px solid white;
+
+    transition: 0.3s ease color;
+        &:hover {
+            color: $primary;
+        }
+}
+
+.redirectText{
+    padding-right: 5px
+}

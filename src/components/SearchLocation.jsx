@@ -5,7 +5,7 @@ import AirportsDisplay from "./AirportsDisplay";
 import { OriginContext } from "../context/DataContext";
 
 const SearchLocation = (props) => {
-  const term = useContext(OriginContext);
+  const term = props.item;
 
   const [airports, setAirports] = useState({});
 

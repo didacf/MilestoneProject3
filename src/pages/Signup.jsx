@@ -13,33 +13,30 @@ const Signup = () => {
     conPassword: "",
   });
 
-  const [isDuplicate, setisDuplicate] = useState()
+  const [isDuplicate, setisDuplicate] = useState();
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (userData.email !== userData.conEmail) {
       alert("emails do not match");
     } else if (userData.password !== userData.conPassword) {
       alert("passwords do not match");
+    } else {
+      const response = await fetch("http://localhost:5000/add_user", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userData),
+      });
+      const data = await response.json();
+      setisDuplicate(data);
+      if (isDuplicate == true) {
+        console.log("DUPLICATE");
+      } else {
+        console.log(isDuplicate);
+      }
     }
-    else{
-    const response = await fetch('http://localhost:5000/add_user', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(userData)
-    });
-    const data = await response.json()
-    setisDuplicate(data)
-    if (isDuplicate==true){
-      console.log("DUPLICATE")
-    }
-    else{console.log(isDuplicate)}
-  }
   };
-
-
-
 
   return (
     <>
@@ -124,6 +121,14 @@ const Signup = () => {
             }
             required
           />
+
+          <div className={styles.redirectContainer}>
+            <p className={styles.redirectText}>Already have an Account?</p>
+            <a className={styles.redirect} href="/Login">
+              Login
+            </a>
+          </div>
+
           <div className={styles.form__buttonContainer}>
             <input
               type={"submit"}
@@ -138,4 +143,3 @@ const Signup = () => {
 };
 
 export default Signup;
-

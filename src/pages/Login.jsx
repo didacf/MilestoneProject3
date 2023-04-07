@@ -4,21 +4,20 @@ import styles from "../styles/Signup.module.scss";
 import { useState } from "react";
 
 const Login = () => {
-  const [userData, setUserData] = useState({email:'', password:''})
+  const [userData, setUserData] = useState({ email: "", password: "" });
 
-    const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(userData);
-    const response = await fetch('http://localhost:5000/login', {
-      method: 'POST',
+    const response = await fetch("http://localhost:5000/login", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(userData)
+      body: JSON.stringify(userData),
     });
-    const data = await response.json()
-  
-  }
+    const data = await response.json();
+  };
 
   return (
     <>
@@ -53,6 +52,12 @@ const Login = () => {
             }
             required
           />
+          <div className={styles.redirectContainer}>
+            <p className={styles.redirectText}>Don't have an Account?</p>
+            <a className={styles.redirect} href="/Signup">
+              Sign up
+            </a>
+          </div>
           <div className={styles.form__buttonContainer}>
             <input
               type={"submit"}

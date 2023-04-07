@@ -99,6 +99,7 @@ const Search = () => {
           <div></div>
         )}
       </div>
+      <SearchLocation item={origin} />
     </div>
   );
 };
