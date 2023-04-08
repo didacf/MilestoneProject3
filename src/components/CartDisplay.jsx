@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./../styles/FlightCard.module.scss";
 
-const FlightCard = (props) => {
+const CartDisplay = (props) => {
   const data = props.item;
   let hr = Math.trunc(data.legs[0].duration / 60);
   let min = data.legs[0].duration % 60;
@@ -14,17 +14,8 @@ const FlightCard = (props) => {
 
   const [hide, setHide] = useState("inherit");
 
-  async function addToCart() {
+  function removeFromCart() {
     setHide("none");
-    const response = await fetch('http://localhost:5000/send_to_cart', {
-      method: 'POST',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    });
-    const data2 = await response.json()
   }
 
   return (
@@ -85,7 +76,7 @@ const FlightCard = (props) => {
       </div>
       <div className={styles.buttonContainer}>
         <p className={styles.price}>${data.price.amount}</p>
-        <button className={styles.button} onClick={addToCart}>
+        <button className={styles.button} onClick={removeFromCart}>
           {props.buttonText}
         </button>
       </div>
@@ -93,4 +84,4 @@ const FlightCard = (props) => {
   );
 };
 
-export default FlightCard;
+export default CartDisplay;

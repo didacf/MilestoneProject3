@@ -2,12 +2,14 @@ import React from "react";
 import axios from "axios";
 import { useState, useEffect, useContext } from "react";
 import AirportsDisplay from "./AirportsDisplay";
-import { OriginContext } from "../context/DataContext";
+import styles from "./../styles/Search.module.scss";
 
 const SearchLocation = (props) => {
-  const term = useContext(OriginContext);
+  const term = props.item;
 
   const [airports, setAirports] = useState({});
+
+  const [hide, setHide] = useState("");
 
   const options = {
     method: "GET",
@@ -20,22 +22,38 @@ const SearchLocation = (props) => {
   };
 
   useEffect(() => {
-    axios
-      .request(options)
-      .then(function (response) {
-        console.log(response.data);
-        setAirports(response.data);
-      })
-      .catch(function (error) {
-        console.error(error);
-      });
+    console.log(term.length);
+    if (term.length < 4) {
+      setHide("hidden");
+    } else {
+      axios
+        .request(options)
+        .then(function (response) {
+          console.log(response.data);
+          setHide("inherit");
+          setAirports(response.data);
+        })
+        .catch(function (error) {
+          console.error(error);
+        });
+    }
   }, [term]);
 
   return (
-    <div>
+    <div
+      className={styles.locationContainer}
+      style={{ display: hide, left: props.left }}
+    >
       {airports.data ? (
         airports.data.map((item, index) => {
-          return <AirportsDisplay item={item} key={index} />;
+          return (
+            <AirportsDisplay
+              item={item}
+              key={index}
+              dataTransfer={props.dataTransfer}
+              setHide={setHide}
+            />
+          );
         })
       ) : (
         <div></div>
