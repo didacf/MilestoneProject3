@@ -7,11 +7,8 @@ import psycopg2
 from flask_sqlalchemy import SQLAlchemy
 import json
 from flask_login import LoginManager, UserMixin, login_user, current_user, login_required, logout_user
-# from flask_wtf import wtforms
-from wtforms import StringField, PasswordField, SubmitField
-from wtforms.validators import InputRequired, Length, ValidationError
-
-
+from sqlalchemy.dialects.postgresql import JSONB
+from datetime import timedelta
 load_dotenv()
 # enviorment variable assignment
 FLASK_DEBUG = os.getenv("FLASK_DEBUG")
@@ -21,7 +18,7 @@ DB_PASSWORD = os.getenv("DB_PASSWORD")
 
 # defining app and server
 app = Flask(__name__)
-CORS(app)
+CORS(app, supports_credentials=True)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:password@localhost/ms3_flights'
 app.config['SECRET_KEY'] = 'password'
 db = SQLAlchemy(app)
@@ -29,7 +26,7 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 
 
-
+app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(hours=1)
 #Database models
 
 class User(db.Model, UserMixin):
@@ -42,10 +39,10 @@ class User(db.Model, UserMixin):
         return str(self.id)
 
 
-class Event(db.Model):
+class Cart(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    description = db.Column(db.String(80), nullable=False)
-    created_at = db.Column(db.String(120), nullable=False, default="1/2/3")
+    user = db.Column(db.Integer, nullable=False)
+    flight_data = db.Column(JSONB, nullable=False)
     
     def __repr__(self):
         return f"Event:{self.description}"
@@ -62,6 +59,7 @@ def format_event(event):
 
 @login_manager.user_loader
 def load_user(user_id):
+    print(User.query.get(int(user_id)))
     return User.query.get(int(user_id))
 
 
@@ -104,7 +102,7 @@ def login():
         login_status= {"logged_in": True}
         print(login_status)
         user = load_user(email.id)
-        login_user(user)
+        isLoggedIn = login_user(user)
         
         return login_status
     else:
@@ -148,6 +146,42 @@ def add_user():
 def logout():
     logout_user()
     return "logout"
+
+@app.route("/send_to_cart", methods=["POST"])
+@login_required
+def test_data():
+    conn = psycopg2.connect(
+        host="localhost",
+        database="ms3_flights",
+        user=DB_USERNAME,
+        password=DB_PASSWORD)
+    
+    data = request.get_json()
+    print(data)
+    json_data = json.dumps(data)
+    cur = conn.cursor()
+    cur.execute("INSERT INTO cart (\"user\", flight_data) VALUES (%s, %s)", (current_user.id, json_data ))
+    conn.commit()
+    cur.close()
+    conn.close()
+    return "yo"
+
+@app.route("/test")
+@login_required
+def test():
+    print(load_user(8))
+    print(current_user.is_authenticated)
+    # print(current_user.id)
+    return "hi"
+@app.route("/test2")
+
+def test2():
+    user = load_user(8)
+    login_user(user)
+    print(current_user.is_authenticated)
+    # print(current_user.id)
+    return "hi"
+
 
 if __name__ == "__main__":
     app.run(debug=True)

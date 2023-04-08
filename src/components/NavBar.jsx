@@ -23,7 +23,7 @@ const NavBar = () => {
                     <a className={styles.nav__item} href={"/"}>Flights</a>
                     <a className={styles.nav__item} href={"/"}>About</a>
                     <a className={styles.nav__item} href={"/"}>Contact</a>
-                    <a className={styles.nav__item} href={"/"}>Cart</a>
+                    <a className={styles.nav__item} href={"/Login"}>Login/Signup</a>
                 </nav>
             </div>
             <div>
