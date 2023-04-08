@@ -8,7 +8,7 @@ const Cart = () => {
   return (
     <div>
       <NavBar />
-      {flights.data ? (
+      {flights ? (
         flights.data.map((item, index) => {
           return (
             <CartDisplay
@@ -21,6 +21,7 @@ const Cart = () => {
       ) : (
         <div></div>
       )}
+      <button>Check out</button>
     </div>
   );
 };
