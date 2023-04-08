@@ -149,7 +149,7 @@ def logout():
 
 @app.route("/send_to_cart", methods=["POST"])
 @login_required
-def test_data():
+def send_to_cart():
     conn = psycopg2.connect(
         host="localhost",
         database="ms3_flights",
@@ -165,6 +165,23 @@ def test_data():
     cur.close()
     conn.close()
     return "yo"
+
+@app.route("/remove_from_cart", methods=["POST"])
+@login_required
+def remove_from_cart():
+    conn = psycopg2.connect(
+        host="localhost",
+        database="ms3_flights",
+        user=DB_USERNAME,
+        password=DB_PASSWORD)
+    data = request.get_json()
+    json_data = json.dumps(data)
+    cur = conn.cursor()
+    cur.execute(f"DELETE FROM cart WHERE flight_data ={json_data}")
+    conn.commit()
+    cur.close()
+    conn.close()
+
 
 @app.route("/test")
 @login_required

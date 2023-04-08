@@ -23,6 +23,7 @@ const Signup = () => {
     } else {
       const response = await fetch("http://localhost:5000/add_user", {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },

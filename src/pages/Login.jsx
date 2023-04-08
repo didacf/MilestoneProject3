@@ -18,7 +18,7 @@ const Login = () => {
       body: JSON.stringify(userData),
     });
     const data = await response.json()
-    debugger
+    
   }
 
   return (
