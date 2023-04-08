@@ -9,15 +9,17 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(userData);
-    const response = await fetch("http://localhost:5000/login", {
-      method: "POST",
+    const response = await fetch('http://localhost:5000/login', {
+      method: 'POST',
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(userData),
     });
-    const data = await response.json();
-  };
+    const data = await response.json()
+    debugger
+  }
 
   return (
     <>

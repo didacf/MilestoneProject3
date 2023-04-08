@@ -14,8 +14,17 @@ const FlightCard = (props) => {
 
   const [hide, setHide] = useState("inherit");
 
-  function addToCart() {
+  async function addToCart() {
     setHide("none");
+    const response = await fetch('http://localhost:5000/send_to_cart', {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    });
+    const data2 = await response.json()
   }
 
   return (

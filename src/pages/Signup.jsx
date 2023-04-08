@@ -29,7 +29,7 @@ const Signup = () => {
         body: JSON.stringify(userData),
       });
       const data = await response.json();
-      setisDuplicate(data);
+      await setisDuplicate(data);
       if (isDuplicate == true) {
         console.log("DUPLICATE");
       } else {
