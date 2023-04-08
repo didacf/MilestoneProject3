@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import FlightCard from "./FlightCard";
 import SearchLocation from "./SearchLocation";
-import { OriginContext } from "../context/DataContext";
 
 const Search = () => {
   let reqData = {
@@ -24,8 +23,8 @@ const Search = () => {
 
   const [inputs, setInputs] = useState({});
 
-  const [origin, setOrigin] = useState();
-  const [destination, setDestination] = useState();
+  const [origin, setOrigin] = useState("");
+  const [destination, setDestination] = useState("");
 
   const [flights, setFlights] = useState({});
 
@@ -67,6 +66,7 @@ const Search = () => {
           placeholder="From"
           value={origin}
           onChange={(e) => setOrigin(e.target.value)}
+          required
         />
 
         <input
@@ -75,6 +75,7 @@ const Search = () => {
           placeholder="To"
           value={destination}
           onChange={(e) => setDestination(e.target.value)}
+          required
         />
         <input
           className={styles.form__date}
@@ -82,6 +83,7 @@ const Search = () => {
           placeholder="Depart Date"
           value={inputs.date}
           onChange={(e) => setInputs({ ...inputs, date: e.target.value })}
+          required
         />
         <input
           className={styles.form__date}
@@ -89,6 +91,7 @@ const Search = () => {
           placeholder="Return Date"
           value={inputs.returnDate}
           onChange={(e) => setInputs({ ...inputs, returnDate: e.target.value })}
+          required
         />
         <input type={"submit"} value={"Submit"} />
       </form>

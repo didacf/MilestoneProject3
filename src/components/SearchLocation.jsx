@@ -22,16 +22,21 @@ const SearchLocation = (props) => {
   };
 
   useEffect(() => {
-    axios
-      .request(options)
-      .then(function (response) {
-        console.log(response.data);
-        setHide("inherit");
-        setAirports(response.data);
-      })
-      .catch(function (error) {
-        console.error(error);
-      });
+    console.log(term.length);
+    if (term.length < 4) {
+      setHide("hidden");
+    } else {
+      axios
+        .request(options)
+        .then(function (response) {
+          console.log(response.data);
+          setHide("inherit");
+          setAirports(response.data);
+        })
+        .catch(function (error) {
+          console.error(error);
+        });
+    }
   }, [term]);
 
   return (
