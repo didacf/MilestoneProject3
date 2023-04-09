@@ -22,14 +22,14 @@ const SearchLocation = (props) => {
   };
 
   useEffect(() => {
-    console.log(term.length);
+
     if (term.length < 4) {
       setHide("hidden");
     } else {
       axios
         .request(options)
         .then(function (response) {
-          console.log(response.data);
+
           setHide("inherit");
           setAirports(response.data);
         })

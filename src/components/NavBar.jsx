@@ -16,7 +16,7 @@ const NavBar = () => {
 
   useEffect(() => {
     setCookie(Cookies.get("bruh"));
-    console.log(cookie);
+
   });
 
   async function logout() {
@@ -47,12 +47,7 @@ const NavBar = () => {
             <a className={styles.nav__item} href={"/"}>
               Flight Search
             </a>
-            <a className={styles.nav__item} href={"/"}>
-              About
-            </a>
-            <a className={styles.nav__item} href={"/"}>
-              Contact
-            </a>
+
             {cookie ? (
               <div style={{display:"inline"}}>
                 <a className={styles.nav__item} href={"/cart"}>
