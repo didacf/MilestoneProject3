@@ -3,6 +3,7 @@ import NavBar from "../components/NavBar";
 import styles from "../styles/Signup.module.scss";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie"
 
 const Login = () => {
   const [userData, setUserData] = useState({ email: "", password: "" });
@@ -21,8 +22,15 @@ const Login = () => {
       body: JSON.stringify(userData),
     });
     const data = await response.json();
-    debugger;
-    navigate("/");
+    console.log(data)
+    if(data.logged_in == true){
+      Cookies.set("bruh", "yo")
+      await navigate("/")
+    }
+    else{
+      alert("INCORRECT USERNAME OR PASSWORD")
+    }
+    
   };
 
   return (

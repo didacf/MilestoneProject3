@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styles from "./../styles/FlightCard.module.scss";
 
 const CartDisplay = (props) => {
-  const data = props.item;
+  const data = props.item[0];
   let hr = Math.trunc(data.legs[0].duration / 60);
   let min = data.legs[0].duration % 60;
   let dep = data.legs[0].departure.slice(11, 16);
@@ -14,8 +14,19 @@ const CartDisplay = (props) => {
 
   const [hide, setHide] = useState("inherit");
 
-  function removeFromCart() {
-    setHide("none");
+  async function removeFromCart() {
+    setHide("none")
+    console.log(data)
+    const response = await fetch('http://localhost:5000/remove_from_cart', {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    });
+    
+    
   }
 
   return (

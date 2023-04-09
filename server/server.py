@@ -177,10 +177,11 @@ def remove_from_cart():
     data = request.get_json()
     json_data = json.dumps(data)
     cur = conn.cursor()
-    cur.execute(f"DELETE FROM cart WHERE flight_data ={json_data}")
+    cur.execute("DELETE FROM cart WHERE flight_data = %s", ((json_data),))
     conn.commit()
     cur.close()
     conn.close()
+    return "hi"
 
 
 @app.route("/test")
@@ -199,6 +200,20 @@ def test2():
     # print(current_user.id)
     return "hi"
 
+@app.route("/access_cart", methods=["GET"])
+@login_required
+def acess_cart():
+    conn = psycopg2.connect(
+        host="localhost",
+        database="ms3_flights",
+        user=DB_USERNAME,
+        password=DB_PASSWORD)
+    cur = conn.cursor()
+    cur.execute(f"SELECT flight_data FROM cart WHERE \"user\" ={current_user.id}")
+    cart_data = cur.fetchall()
+    cur.close()
+    conn.close()
+    return (cart_data)
 
 if __name__ == "__main__":
     app.run(debug=True)

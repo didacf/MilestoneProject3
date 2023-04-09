@@ -15,14 +15,20 @@ const NavBar = () => {
   let navigate = useNavigate();
 
   useEffect(() => {
-    setCookie(Cookies.get("session"));
+    setCookie(Cookies.get("bruh"));
     console.log(cookie);
   });
 
-  function logout() {
+  async function logout() {
     setCookie("");
-    Cookies.remove("session");
-    console.log(cookie, Cookies.get("session"));
+    Cookies.remove("bruh");
+    const response = await fetch("http://localhost:5000/logout", {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
     navigate("/login");
   }
 
@@ -48,7 +54,7 @@ const NavBar = () => {
               Contact
             </a>
             {cookie ? (
-              <div>
+              <div style={{display:"inline"}}>
                 <a className={styles.nav__item} href={"/cart"}>
                   Cart
                 </a>
