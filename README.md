@@ -1,4 +1,4 @@
-# eFlights App
+## eFlights App
 
 Visit our current version here
 
@@ -9,20 +9,62 @@ This final project for our SDSU software developers bootcamp, consists on a flig
 
 ## Details
 
+This a Monorepo app, which consists in a back end server, Python Flask and Frontend server, React.
+Our eFlight application, allows you to look for flight, without authentication, but once you are ready to purchase, you can register your username, and the flight can be saved in a cart, and purchase.
+
+## Local Installation:
+
+* npm install
+* pip install -r requirements.txt
+* env file with private data.
+* npm start, http://locahost:3000/
+* python3 server/server.py, http://localhost:5000/
+* Local database connectivity with Postgres
+
+
 ## Technolgy
 
-<img src="https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAF" height="30">
+* <img src="https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAF" height="30">
 
-<img src="https://img.shields.io/badge/SASS-hotpink.svg?style=for-the-badge&logo=SASS&logoColor=white" height = "30">
+* <img src="https://img.shields.io/badge/SASS-hotpink.svg?style=for-the-badge&logo=SASS&logoColor=white" height = "30">
 
-<img src="https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white" height="30">
+* <img src="https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white" height="30">
 
-<img src="https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white" height="30">
+* <img src="https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white" height="30">
 
-<img src="https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white" height="30">
+* <img src="https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white" height="30">
 
-<img src="https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54" height="30">
+* <img src="https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54" height="30">
 
+* Rapid API to access Skyscanner flights API.
+
+* SQL Alchemy Database toolkit for Python
+
+## Web routes
+-----
+| Method        | Path              | Purpose                                   |
+|:--------------|:------------------|:------------------------------------------|
+|    GET        |/                  | Home Page                                 |
+|    GET        |/Search            | Search Flight Engine                      |
+|    GET        |/SearchLocation    | Search Location on Search page            |
+|    GET        |Airport Display    | Airport Display suggestions on Search page|
+|    POST       | Login             | Login Page |  
+|    POST       |Signup             | Signup Page |
+___
+# Screenshots 
+
+* <img src="public/pictures/eFlights_home.jpg">
+
+# Issues Encontured
+
+* Lost authentication, after clicking other page. Resolution; credentials and content type: application/json
+
+# Future Updates
+---
+* Credit card processing redirect
+* eStore
+* Add more features to the site as Hotel and Car rental search and purchase.
+* Styling
 # Contributors
 
 [Jonathan Kishi](https://github.com/Jkishi6)
@@ -30,6 +72,7 @@ This final project for our SDSU software developers bootcamp, consists on a flig
 [Zane Larson](https://github.com/ZDC7096)
 
 [Didac Fernandez](https://www.github.com/didacf)
+
 
 # Getting Started with Create React App
 
