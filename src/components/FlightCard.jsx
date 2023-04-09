@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "./../styles/FlightCard.module.scss";
-
+import Cookies from "js-cookie"
+import { useNavigate } from "react-router-dom";
 const FlightCard = (props) => {
   const data = props.item;
   let hr = Math.trunc(data.legs[0].duration / 60);
@@ -13,8 +14,10 @@ const FlightCard = (props) => {
   let arr2 = data.legs[1].arrival.slice(11, 16);
 
   const [hide, setHide] = useState("inherit");
+  let navigate = useNavigate()
 
   async function addToCart() {
+    if(Cookies.get("bruh") == "yo"){
     setHide("none");
     const response = await fetch('http://localhost:5000/send_to_cart', {
       method: 'POST',
@@ -25,6 +28,11 @@ const FlightCard = (props) => {
       body: JSON.stringify(data)
     });
     const data2 = await response.json()
+  }
+  else{
+    navigate("/login")
+    alert("PLEASE LOGIN BEFORE USING CART")
+  }
   }
 
   return (

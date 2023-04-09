@@ -2,7 +2,7 @@ import React from "react";
 import NavBar from "../components/NavBar";
 import styles from "../styles/Signup.module.scss";
 import { useState, useEffect } from "react";
-
+import { useNavigate } from "react-router-dom"
 const Signup = () => {
   const [userData, setUserData] = useState({
     firstname: "",
@@ -12,8 +12,7 @@ const Signup = () => {
     password: "",
     conPassword: "",
   });
-
-  const [isDuplicate, setisDuplicate] = useState();
+  let navigate = useNavigate()
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (userData.email !== userData.conEmail) {
@@ -23,17 +22,17 @@ const Signup = () => {
     } else {
       const response = await fetch("http://localhost:5000/add_user", {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(userData),
       });
       const data = await response.json();
-      await setisDuplicate(data);
-      if (isDuplicate == true) {
-        console.log("DUPLICATE");
+      if (data.status == true) {
+        alert("EMAIL ALREADY IN USE");
       } else {
-        console.log(isDuplicate);
+        navigate("/login");
       }
     }
   };
