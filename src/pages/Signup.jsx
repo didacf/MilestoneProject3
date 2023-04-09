@@ -20,7 +20,7 @@ const Signup = () => {
     } else if (userData.password !== userData.conPassword) {
       alert("passwords do not match");
     } else {
-      const response = await fetch("http://localhost:5000/add_user", {
+      const response = await fetch("http://localhost:8080/add_user", {
         method: "POST",
         credentials: "include",
         headers: {
