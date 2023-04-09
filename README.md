@@ -1,7 +1,5 @@
 ## eFlights App
 
-Visit our current version here
-
 
 ## eFlights story
 
@@ -65,6 +63,8 @@ ___
 * eStore
 * Add more features to the site as Hotel and Car rental search and purchase.
 * Styling
+* Deployment coming soon
+
 # Contributors
 
 [Jonathan Kishi](https://github.com/Jkishi6)
