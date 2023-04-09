@@ -15,6 +15,10 @@ FLASK_DEBUG = os.getenv("FLASK_DEBUG")
 DB_USERNAME = os.getenv("DB_USERNAME")
 DB_PASSWORD = os.getenv("DB_PASSWORD")
 
+#Route needed for default EB health check route
+@app.route('/')
+def home():
+    return "ok"
 
 # defining app and server
 app = Flask(__name__)
@@ -216,7 +220,7 @@ def acess_cart():
     return (cart_data)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(port=8080)
 
 
 
